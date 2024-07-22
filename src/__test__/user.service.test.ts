@@ -2,6 +2,7 @@ import userRepository from "../database/repositories/user.repository";
 import { InternalServerError, NotFoundError } from "../errors/error";
 import userService from "../services/user.service";
 import userController from "../controllers/user.controller";
+import mongoose from "mongoose";
 
 // Mock userRepository
 jest.mock("../database/repositories/user.repository", () => ({
@@ -10,6 +11,11 @@ jest.mock("../database/repositories/user.repository", () => ({
   getUsers: jest.fn(),
   updateUser: jest.fn(),
 }));
+
+// Close MongoDB connection after all tests
+afterAll(async () => {
+  await mongoose.connection.close();
+});
 
 // getUserById
 describe("getUser", () => {
@@ -139,6 +145,10 @@ describe("getAllUser", () => {
 
 // updateUser
 describe("updateUser", () => {
+  afterEach(() => {
+    jest.clearAllMocks(); // Clears all mocks after each test
+  });
+
   it("should update user successfully", async () => {
     // Mock data
     const userId = "user123";
