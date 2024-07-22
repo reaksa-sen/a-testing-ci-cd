@@ -41,7 +41,7 @@ export class UserController extends Controller {
     @FormField() email: string
   ): Promise<UserProfileResponse> {
     try {
-      const imageUrl = await uploadFile(image);
+      const imageUrl = await uploadFile(image); 
       const users = await userService.createUser({
         name,
         age,
