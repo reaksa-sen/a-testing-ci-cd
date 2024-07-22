@@ -89,7 +89,7 @@ development
 .env
 .env.development
 .env.production
-.env.testing
+.env.test
 
 yarn.lock
 
