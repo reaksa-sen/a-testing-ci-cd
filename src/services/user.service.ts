@@ -6,7 +6,7 @@ import { UserCreationRepoParams } from "../types/interface";
 class UserService {
   public async getUser(useId: string): Promise<IUser | null> {
     try {
-      const user = await userRepository.getUser(useId);
+      const user = await userRepository.getUser(useId); 
       return user;
     } catch {
       throw new NotFoundError("User Not Found!");
