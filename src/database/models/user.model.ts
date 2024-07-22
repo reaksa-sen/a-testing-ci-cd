@@ -17,4 +17,4 @@ const UserSchema: Schema = new Schema({
   image: { type: String, required: true },
 });
 
-export const User = model<IUser>("User", UserSchema);
+export const User = model<IUser>("User", UserSchema); 
