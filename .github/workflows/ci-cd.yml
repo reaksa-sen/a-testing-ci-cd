@@ -28,7 +28,15 @@ jobs:
         run: yarn install    
 
       - name: Run build
-        run: yarn build
+        run: |
+          # Create the .env.production file if it does not exist
+          if [ ! -f src/configs/.env.production ]; then
+            mkdir -p src/configs
+            echo "NODE_ENV=production" > src/configs/.env.production
+            echo "PORT=${{secrets.PORT}}" >> src/configs/.env.production
+            echo "MONGODB_URL=${{secrets.MONGODB_URL}}" >> src/configs/.env.production
+          fi
+        yarn build
 
       - name: List build directory contents
         run: ls -la ./build
