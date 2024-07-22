@@ -13,7 +13,7 @@ class UserService {
     }
   }
 
-  public async createUser(newInfo: UserCreationRepoParams): Promise<IUser> {
+  public async createUser(newInfo: UserCreationRepoParams): Promise<IUser> { 
     try {
       const users = await userRepository.createUser(newInfo);
       return users;
