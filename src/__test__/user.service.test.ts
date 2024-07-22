@@ -1,6 +1,3 @@
-import { config } from 'dotenv';
-config({ path: '.env.test' });
-import { IUser } from "../database/models/user.model";
 import userRepository from "../database/repositories/user.repository";
 import { InternalServerError, NotFoundError } from "../errors/error";
 import userService from "../services/user.service";
@@ -21,13 +18,12 @@ describe("getUser", () => {
   });
 
   it("should return a user when found", async () => {
-    const mockUser: IUser = {
+    const mockUser = {
       _id: "1",
       name: "John Doe",
       email: "jon@gmail.com",
       age: 2,
       gender: "male",
-      image: 'https://sa-test-file-upload.s3.amazonaws.com/1721553900118-me.jpg'
     };
     (userRepository.getUser as jest.Mock).mockResolvedValue(mockUser);
 
@@ -67,7 +63,7 @@ describe("createUser", () => {
   });
 
   it("should create a user successfully", async () => {
-    const mockUser: IUser = {
+    const mockUser = {
       _id: "1",
       name: "John Doe",
       email: "john@example.com",
@@ -84,7 +80,7 @@ describe("createUser", () => {
   });
 
   it("should throw an InternalServerError when user creation fails", async () => {
-    const mockUser: IUser = {
+    const mockUser = {
       _id: "1",
       name: "John Doe",
       email: "john@example.com",
@@ -107,13 +103,12 @@ describe("getAllUser", () => {
   });
 
   it("should return user when user not found", async () => {
-    const mockUser: IUser = {
+    const mockUser = {
       _id: "1",
       name: "John Doe",
       email: "john@example.com",
       age: 10,
       gender: "male",
-      image: 'https://sa-test-file-upload.s3.amazonaws.com/1721553900118-me.jpg'
     };
     (userRepository.getUsers as jest.Mock).mockResolvedValue(mockUser);
 
@@ -156,7 +151,6 @@ describe("updateUser", () => {
       age: 30,
       gender: "Male",
       email: "updated@example.com",
-      image: 'https://sa-test-file-upload.s3.amazonaws.com/1721553900118-me.jpg'
     };
     (userRepository.updateUser as jest.Mock).mockResolvedValue(updatedUser);
 
