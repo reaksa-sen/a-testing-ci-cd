@@ -36,7 +36,8 @@ jobs:
 
       - name: Run tests
         env:
-         MONGODB_URL: ${{ secrets.MONGODB_URL }}
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: yarn test
 
       - name: Archive build artifacts
