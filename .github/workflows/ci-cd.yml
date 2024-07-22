@@ -36,7 +36,7 @@ jobs:
 
       - name: Run tests
         env:
-          CUSTOM_ENV_VARIABLE: ${{ secrets.MONGODB_URL }}
+         MONGODB_URL: ${{ secrets.MONGODB_URL }}
         run: yarn test
 
       - name: Archive build artifacts
