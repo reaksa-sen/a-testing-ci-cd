@@ -2,6 +2,7 @@ import { IUser } from "../database/models/user.model";
 import userRepository from "../database/repositories/user.repository";
 import { InternalServerError, NotFoundError } from "../errors/error";
 import { UserCreationRepoParams } from "../types/interface";
+import { uploadFile } from "../utils/s3config";
 
 class UserService {
   public async getUser(useId: string): Promise<IUser | null> {
@@ -13,9 +14,10 @@ class UserService {
     }
   }
 
-  public async createUser(newInfo: UserCreationRepoParams): Promise<IUser> { 
+  public async createUser(newInfo: UserCreationRepoParams, image: Express.Multer.File): Promise<IUser> { 
     try {
-      const users = await userRepository.createUser(newInfo);
+      const imageUrl = await uploadFile(image)
+      const users = await userRepository.createUser({...newInfo, image: imageUrl});
       return users;
     } catch (error) {
       throw new InternalServerError("Failed to create user");

@@ -11,9 +11,13 @@
     "start:local": "pm2 start ecosystem.config.local.js",
     "start": "pm2 start ecosystem.config.js",
     "restart": "pm2 reload ecosystem.config.js",
-    "db:insert": "ts-node src/database/scripts/insert-data.ts"
+    "db:insert": "ts-node src/database/scripts/insert-data.ts",
+    "docker:dev": "docker-compose",
+    "docker:local": "docker-compose -f docker-compose.yml up -d",
+    "docker:stop": "docker-compose down"
   },
   "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.621.0",
     "@aws-sdk/client-s3": "^3.614.0",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
@@ -21,8 +25,9 @@
     "@types/node": "^20.14.9",
     "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.6",
-    "axios": "^1.7.2",
+    "axios": "^1.7.3",
     "cross-env": "^7.0.3",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "esbuild": "^0.22.0",
     "esbuild-plugin-copy": "^2.1.1",
@@ -31,6 +36,7 @@
     "mongoose": "^8.4.4",
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.4",
+    "query-string": "^9.1.0",
     "supertest": "^7.0.0",
     "swagger-ui-express": "^5.0.1",
     "ts-jest": "^29.1.5",

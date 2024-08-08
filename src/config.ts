@@ -9,6 +9,10 @@ type Config = {
   region?:string;
   accessKeyId?:string;
   secretAccessKey?: string
+  cognitoUserPoolId?: string;
+  cognitoClientId?: string;
+  cognitoClientSecret?: string;
+  cognitoCallbackURL?: string
 };
 
 // Function to load and validate environment variables
@@ -26,6 +30,10 @@ function loadConfig(): Config {
     AWS_REGION: yup.string().required(),
     AWS_ACCESS_KEY_ID: yup.string().required(),
     AWS_SECRET_ACCESS_KEY: yup.string().required(),
+    COGNITO_USER_POOL_ID: yup.string().required(),
+    COGNITO_CLIENT_ID: yup.string().required(),
+    COGNITO_CLIENT_SECRET: yup.string().required(),
+    GOOGLE_CALLBACK_URL: yup.string().required()
   }).required();
 
   // Validate the environment variables
@@ -43,6 +51,10 @@ function loadConfig(): Config {
     region: envVars.AWS_REGION,
     accessKeyId: envVars.AWS_ACCESS_KEY_ID,
     secretAccessKey: envVars.AWS_SECRET_ACCESS_KEY,
+    cognitoUserPoolId: envVars.COGNITO_USER_POOL_ID,
+    cognitoClientId: envVars.COGNITO_CLIENT_ID,
+    cognitoClientSecret: envVars.COGNITO_CLIENT_SECRET,
+    cognitoCallbackURL: envVars.GOOGLE_CALLBACK_URL
   };
 }
 

@@ -11,15 +11,16 @@ import {
   Query,
   UploadedFile,
   FormField,
+  Tags,
 } from "tsoa";
 import userService from "../services/user.service";
 import { InternalServerError, NotFoundError } from "../errors/error";
 import { IUser } from "../database/models/user.model";
 import { UserProfileResponse } from "../types/interface";
 import sendResponse from "../utils/send-response";
-import { uploadFile } from "../utils/s3config";
 
 @Route("/v1/users")
+@Tags("User")
 export class UserController extends Controller {
   @Get("{userId}")
   public async getUser(@Path() userId: string): Promise<IUser | null> {
@@ -41,14 +42,13 @@ export class UserController extends Controller {
     @FormField() email: string
   ): Promise<UserProfileResponse> {
     try {
-      const imageUrl = await uploadFile(image); 
+      // const imageUrl = await uploadFile(image); 
       const users = await userService.createUser({
         name,
         age,
         gender,
         email,
-        image: imageUrl,
-      });
+      },image);
 
       return sendResponse<IUser>({ message: "success", data: users });
     } catch (error) {

@@ -5,7 +5,7 @@ export interface UserCreationRepoParams {
   name: string;
   gender: string;
   age: number;
-  image: string;
+  image?: string;
 }
 
 export interface UserCreationRequestParams {
@@ -13,7 +13,7 @@ export interface UserCreationRequestParams {
   name: string;
   gender: string;
   age: number;
-  image:string;
+  image: string;
 }
 
 export interface UserUpdateRequestParams {
@@ -23,6 +23,17 @@ export interface UserUpdateRequestParams {
 }
 
 export interface UserProfileResponse {
-    message: string;
-    data: IUser
-  }
+  message: string;
+  data: IUser;
+}
+
+export interface SignupRequest {
+  email: string;
+  username: string;
+  password: string;
+}
+
+export interface SigninRequest {
+  email: string;
+  password: string;
+}

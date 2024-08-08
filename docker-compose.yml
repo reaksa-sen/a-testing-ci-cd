@@ -1,0 +1,76 @@
+# version: '3.8'
+# services:
+#    app:
+#     container_name: dev-app
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.dev
+#     restart: always
+#     ports:
+#       - 5000:3000
+#     develop:
+#       watch:
+#         - action: rebuild
+#         - path: .
+#     env_file: ./src/configs/.env.development
+#     environment:
+#       - DOCKER_ENV=true
+#       - MONGODB_URL=mongodb://mongodb:27017/dbconnect
+#       - NODE_ENV=development
+#     volumes:
+#       # - ./src:/app/src # HOT RELOADING, ANY CHANGE IN SRC FOLDER OUR APP WILL RESTART
+#       - .:/app
+#       - /app/node_modules
+
+#     mongo:
+#     container_name: mongodb
+#     image: mongo:latest
+#     ports:
+#       - "27017:27017"
+#     volumes:
+#       - mongo-data:/data/db
+
+# volumes:
+#   mongo-data:
+
+version: '3.8'
+services:
+  app:
+    container_name: backend_container
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./databackup:/data
+    env_file: ./src/configs/.env.development
+    environment:
+      - DOCKER_ENV=true
+      - MONGODB_URL=mongodb://mongodb:27017/dbconnect
+      - NODE_ENV=development
+    volumes:
+      - ./src:/app/src
+      - ./ecosystem.config.local.js:/app/ecosystem.config.local.js
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./nodemon.json:/app/nodemon.json
+      - ./tsoa.json:/app/tsoa.json
+      - ./build-script.js:/app/build-script.js
+      - /app/node_modules
+      - ./:/app
+      
+    command: yarn dev
+    depends_on:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

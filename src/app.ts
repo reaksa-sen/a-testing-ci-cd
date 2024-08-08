@@ -6,10 +6,6 @@ import path from "path";
 import loggerMiddleware from "./middleware/logger.middleware";
 import { errorHandler, notFoundHandler } from "./middleware/error-handle-middleware";
 
-console.log('Environment Variables:', {
-  S3_BUCKET_NAME: process.env.AWS_S3_BUCKET,
-  AWS_REGION: process.env.AWS_REGION,
-});
 
 // Dynamically load swagger.json
 const swaggerDocument = JSON.parse(

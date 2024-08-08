@@ -14,7 +14,7 @@ const UserSchema: Schema = new Schema({
   email: { type: String, required: true, unique: true },
   age: { type: Number, required: true },
   gender: { type: String, required: true, enum: ["male", "female", "other"] },
-  image: { type: String, required: true },
+  image: { type: String},
 });
 
 export const User = model<IUser>("User", UserSchema); 
